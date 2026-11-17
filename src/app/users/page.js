@@ -1,3 +1,4 @@
+import { UserCard } from "@/components/users/UserCard";
 import { cacheLife, cacheTag } from "next/cache";
 import Link from "next/link";
 import React from "react";
@@ -39,15 +40,7 @@ const UsersPage = async () => {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {users.map((user) => (
-            <div
-              key={user._id}
-              className="rounded-xl border border-gray-200 p-5 shadow-sm"
-            >
-              <p className="mt-1 text-sm text-gray-300">{user._id}</p>
-              <h2 className="text-lg font-semibold">{user.name}</h2>
-              <p className="mt-1 text-sm text-gray-500">{user.email}</p>
-            
-            </div>
+            <UserCard key={user._id} user={user} />
           ))}
         </div>
       )}
