@@ -21,7 +21,6 @@ export function UserForm() {
     const form = e.currentTarget;
     const formData = new FormData(form);
     let data = Object.fromEntries(formData.entries());
-    console.log("Form Data:", data);
 
     try {
       const response = await fetch("http://localhost:5000/users", {
@@ -39,7 +38,7 @@ export function UserForm() {
       }
 
       alert("User created successfully!");
-
+      console.log("User created:", result.user);
       await updateUsersCache();
 
       form.reset();
