@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { updateUsersCache } from "@/app/users/create/updateUsersCache";
+import { updateUsersCache } from "@/lib/actions/users";
 import { apiUrl } from "@/lib/api";
 import { UserDialog } from "./UserDialog";
 

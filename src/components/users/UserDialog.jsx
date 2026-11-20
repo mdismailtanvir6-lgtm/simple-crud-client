@@ -1,4 +1,4 @@
-import { updateUsersCache } from "@/app/users/create/updateUsersCache";
+import { updateUsersCache } from "@/lib/actions/users";
 import { Button } from "@/components/ui/button";
 import { apiUrl } from "@/lib/api";
 import {
