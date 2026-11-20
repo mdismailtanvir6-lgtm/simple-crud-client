@@ -1,7 +1,12 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function updateUsersCache() {
-  revalidateTag("users", "max");
+  // Update users tag
+  // revalidateTag("users", "max");
+
+  // Public user pages
+  revalidatePath("/");
+  revalidatePath("/users");
 }
