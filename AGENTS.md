@@ -11,5 +11,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## API configuration
 
 - All server calls go through `src/lib/api.js` (`apiUrl(path)`); don't reintroduce hardcoded `localhost:5000` URLs.
-- `NEXT_PUBLIC_API_URL` sets the Express API base URL and falls back to `http://localhost:5000`. It is inlined at build time, so changing it on Vercel requires a redeploy.
+- `NEXT_PUBLIC_API_URL` sets the Express API base URL. It is inlined at build time, so changing it on Vercel requires a redeploy. Without a usable value, local development falls back to `http://localhost:5000` and production falls back to the deployed API.
 - The users list uses `use cache` with `cacheLife("max")`; a build made before the env var is set can cache an empty list until the next deploy or revalidation.
