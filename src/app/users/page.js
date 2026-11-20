@@ -1,4 +1,5 @@
 import { UserCard } from "@/components/users/UserCard";
+import { apiUrl } from "@/lib/api";
 import { cacheLife, cacheTag } from "next/cache";
 import Link from "next/link";
 import React from "react";
@@ -8,7 +9,7 @@ async function getUsers() {
   cacheLife("max");
   cacheTag("users");
   try {
-    const response = await fetch("http://localhost:5000/users");
+    const response = await fetch(apiUrl("/users"));
 
     if (!response.ok) {
       throw new Error("Failed to fetch users");

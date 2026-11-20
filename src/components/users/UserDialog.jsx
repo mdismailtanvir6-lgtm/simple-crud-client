@@ -1,5 +1,6 @@
 import { updateUsersCache } from "@/app/users/create/updateUsersCache";
 import { Button } from "@/components/ui/button";
+import { apiUrl } from "@/lib/api";
 import {
   Dialog,
   DialogClose,
@@ -27,7 +28,7 @@ export function UserDialog({ className, children, user }) {
     console.log("Form submitted:", data);
 
     try {
-      const response = await fetch(`http://localhost:5000/users/${user._id}`, {
+      const response = await fetch(apiUrl(`/users/${user._id}`), {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

@@ -9,13 +9,14 @@ import {
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { updateUsersCache } from "@/app/users/create/updateUsersCache";
+import { apiUrl } from "@/lib/api";
 import { UserDialog } from "./UserDialog";
 
 export function UserCard({ user }) {
   // === hanlde delete user ===
   const handleDelete = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:5000/users/${userId}`, {
+      const response = await fetch(apiUrl(`/users/${userId}`), {
         method: "DELETE",
       });
       if (!response.ok) {

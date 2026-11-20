@@ -1,9 +1,10 @@
+import { apiUrl } from "@/lib/api";
 import React, { Suspense } from "react";
 
 const UserDetails = async ({ params }) => {
   const { userId } = await params;
 
-  const response = await fetch(`http://localhost:5000/users/${userId}`);
+  const response = await fetch(apiUrl(`/users/${userId}`));
   const user = await response.json();
 
   return (

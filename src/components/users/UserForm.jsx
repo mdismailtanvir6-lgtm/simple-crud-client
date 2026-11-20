@@ -2,6 +2,7 @@
 
 import { updateUsersCache } from "@/app/users/create/updateUsersCache";
 import { Button } from "@/components/ui/button";
+import { apiUrl } from "@/lib/api";
 import {
   Field,
   FieldDescription,
@@ -23,7 +24,7 @@ export function UserForm() {
     let data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch("http://localhost:5000/users", {
+      const response = await fetch(apiUrl("/users"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
