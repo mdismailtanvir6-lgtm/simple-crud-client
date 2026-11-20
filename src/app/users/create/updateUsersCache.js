@@ -4,7 +4,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function updateUsersCache() {
   // Update users tag
-  // revalidateTag("users", "max");
+  revalidateTag("users", "max");
 
   // Public user pages
   revalidatePath("/");
