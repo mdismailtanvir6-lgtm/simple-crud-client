@@ -1,8 +1,7 @@
 "use client";
 
-import { updateUsersCache } from "@/lib/actions/users";
+import { createUser } from "@/lib/actions/users";
 import { Button } from "@/components/ui/button";
-import { apiUrl } from "@/lib/api";
 import {
   Field,
   FieldDescription,
@@ -10,48 +9,15 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-
-import { useRouter } from "next/navigation";
+import { useActionState } from "react";
 
 export function UserForm() {
-  const router = useRouter();
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    let data = Object.fromEntries(formData.entries());
-
-    try {
-      const response = await fetch(apiUrl("/users"), {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-        throw new Error(result.message || "Failed to create user");
-      }
-
-      alert("User created successfully!");
-      console.log("User created:", result.user);
-      await updateUsersCache();
-
-      form.reset();
-      router.push("/users");
-    } catch (error) {
-      console.error("User creation failed:", error);
-      alert(`${error.message || "Unknown error"}`);
-    }
-  };
+  const [state, formAction, pending] = useActionState(createUser, {
+    error: null,
+  });
 
   return (
-    <form className="flex w-96 flex-col gap-4" onSubmit={onSubmit}>
+    <form className="flex w-96 flex-col gap-4" action={formAction}>
       <FieldGroup>
         <Field>
           <FieldLabel htmlFor="fieldgroup-name">Name</FieldLabel>
@@ -69,11 +35,18 @@ export function UserForm() {
             We&apos;ll send updates to this address.
           </FieldDescription>
         </Field>
+
+        {state?.error ? (
+          <p className="text-sm text-destructive">{state.error}</p>
+        ) : null}
+
         <Field orientation="horizontal">
-          <Button type="reset" variant="outline">
+          <Button type="reset" variant="outline" disabled={pending}>
             Reset
           </Button>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={pending}>
+            {pending ? "Creating..." : "Submit"}
+          </Button>
         </Field>
       </FieldGroup>
     </form>
