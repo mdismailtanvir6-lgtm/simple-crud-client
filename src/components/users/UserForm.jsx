@@ -44,9 +44,6 @@ export function UserForm() {
 
       form.reset();
       router.push("/users");
-      // Force the destination route to fetch fresh RSC data instead of using
-      // any client-side cached copy.
-      router.refresh();
     } catch (error) {
       console.error("User creation failed:", error);
       alert(`${error.message || "Unknown error"}`);
